@@ -1,0 +1,63 @@
+Module 1: The Foundations of Digital Audio
+
+1.1. The Physics and Representation of Sound
+
+    Prompt: "Explain the fundamental physics of sound and its digital representation. Compare real-world acoustic waves (compression and rarefaction) to digital PCM (Pulse Code Modulation) data. Break down the mathematics of sample rates (e.g., 44.1kHz), bit depth (16-bit vs. 32-bit float), and the Nyquist-Shannon sampling theorem with completely solved mathematical examples. Conclude with an overview of common audio formats (WAV, MP3, OGG) and explain how raw audio data is structured in memory."
+
+1.2. Memory Management and Chunking
+
+    Prompt: "Detail the architecture for managing audio data in a C++ program. Explain what 'chunks' and buffers are in the context of real-time audio streams. Provide C++ boilerplate code demonstrating how to allocate, store, and manage ring buffers (circular buffers) for continuous audio streaming. Address the system-level constraints of audio programming, specifically focusing on thread-safety, memory allocation inside the audio callback, and how to use lock-free data structures or atomic operations to avoid audio dropouts (buffer underruns)."
+
+Module 2: Core Synthesis engine
+
+2.1. DIY Synth 1: Sound Output
+
+    Prompt: "Walk me through writing the bare-minimum C++ code required to output a continuous sound to the speakers. Use a standard API (such as Windows waveOut, XAudio2, or PortAudio). Focus on the 'Audio Callback' function. Provide the exact C++ implementation to generate a continuous 440Hz Sine wave, filling the system's audio buffer chunk by chunk. Explain the integer or floating-point math used to calculate the sine wave phase increment per sample."
+
+2.2. DIY Synth 2: Common Wave Forms
+
+    Prompt: "Expand the basic audio engine to support standard synthesizer waveforms: Square, Sawtooth, and Triangle. Provide the C++ functions to generate these shapes purely from a phase accumulator (0.0 to 1.0). Include the detailed mathematical equations for each waveform. Show how to abstract the oscillator code into a clean, reusable C++ class structure, allowing for rapid switching between waveform types during runtime."
+
+Module 3: Advanced Audio Generation
+
+3.1. DIY Synth 3: Sampling, Mixing, and Polyphony
+
+    Prompt: "Explain the mathematics and programming logic of audio mixing. How do we combine multiple waveforms (polyphony) into a single audio buffer without causing digital clipping? Provide C++ code demonstrating how to sum audio signals, apply attenuation (gain staging), and implement a basic hard or soft clipper to protect the output. Explain the concept of reading and interpolating external audio samples (WAV files) into the mix."
+
+3.2. Band-Limited Wave Forms (Anti-Aliasing)
+
+    Prompt: "Tackle the digital audio problem of aliasing. Explain why naively generating mathematically perfect square or sawtooth waves causes foldover distortion at high frequencies. Provide a detailed mathematical derivation of the Fourier series for a square wave. Then, write the C++ implementation for generating Band-Limited waveforms using Additive Synthesis (summing sine waves up to the Nyquist limit) or BLIT (Band Limited Impulse Train) algorithms to ensure clean, professional-grade sound."
+
+Module 4: Transients and Percussion
+
+4.1. Envelope Generation (ADSR)
+
+    Prompt: "Explain the concept of an ADSR (Attack, Decay, Sustain, Release) envelope. Why are envelopes necessary for making a synthesizer sound musical? Provide a C++ class implementation for a state-machine based ADSR envelope. Show how to multiply the envelope's floating-point output (0.0 to 1.0) with an oscillator's audio buffer to shape the volume of a note over time."
+
+4.2. DIY Synth: Basic Drum
+
+    Prompt: "Guide me through synthesizing a basic drum kit (Kick, Snare, Hi-Hat) from scratch using C++. Explain the acoustic components of percussion. Write the code for a Kick drum using a fast pitch-drop envelope applied to a sine wave. Write the code for a Snare and Hi-Hat using a pseudo-random number generator (White Noise) combined with specific ADSR envelopes and basic filtering."
+
+Module 5: Time-Based Audio Effects (DSP)
+
+5.1. DIY Synth: Delay (Echo)
+
+    Prompt: "Explain the concept of a digital Delay effect. Show how to implement a delay line using a C++ circular buffer. The implementation should include parameters for Delay Time (in milliseconds), Feedback (how much signal is fed back into the buffer), and Dry/Wet mix. Provide the exact memory indexing math required to read and write to the delay buffer simultaneously without overwriting active data."
+
+5.2. DIY Synth: Flange Effect
+
+    Prompt: "Build upon the delay line code to create a Flanger effect. Explain the mathematics of how modulating a very short delay line (1ms to 10ms) with a Low Frequency Oscillator (LFO) creates comb filtering and the classic 'jet engine' swoosh sound. Provide the C++ code to implement fractional delay line reading, utilizing linear interpolation to smoothly read between audio samples."
+
+5.3. DIY Synth: Multitap Reverb
+
+    Prompt: "Explain algorithmic reverb. Break down how a dense network of multiple delay lines (Multitap Delay) and all-pass filters can simulate physical acoustic spaces. Provide the C++ implementation for a basic algorithmic reverb using Schroeder reverberator topology (comb filters running in parallel fed into series all-pass filters). Include the math for calculating the feedback coefficients."
+
+Module 6: Advanced Signal Processing
+
+6.1. DIY Synth: 1D Discrete Convolution of Audio Samples
+
+    Prompt: "Provide a deep dive into the mathematics of 1D Discrete Convolution. Explain the formula for convolution and how it applies to digital signal processing. Provide a completely solved mathematical example of convolving a small input signal array with a small impulse response array. Then, provide the raw C++ code to perform standard time-domain convolution on an audio buffer."
+
+6.2. DIY Synth: Convolution Reverb
+
+    Prompt: "Apply the concept of 1D convolution to create a Convolution Reverb effect. Explain how an Impulse Response (IR) captures the exact acoustic characteristics of a real physical space. Write the C++ implementation to convolve an incoming dry audio signal with an IR audio file. Discuss the CPU cost of time-domain convolution and briefly introduce the concept of Fast Fourier Transform (FFT) based convolution for optimizing real-time performance in low-latency systems."
