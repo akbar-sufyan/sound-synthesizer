@@ -24,7 +24,7 @@ bool WriteWaveFile(
 	const unsigned short numChannels,
 	const unsigned int sampleRate,
 	const unsigned int bitsPerSample,
-	const unsigned short audioFormat = 1)
+	const unsigned short audioFormat)
 {
 	FILE* file = fopen(fileName, "wb");
 	if (!file)
@@ -60,4 +60,7 @@ bool WriteWaveFile(
 
 	// write data to file
 	fwrite(data, dataSize, 1, file);
+
+	fclose(file);
+	return true;
 }

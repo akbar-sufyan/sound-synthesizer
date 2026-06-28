@@ -1,0 +1,2 @@
+Unnamed (Anonymous) Namespaces: 
+Declaring a namespace without a name restricts the visibility of its variables and functions strictly to that specific source file (internal linkage), serving as a modern replacement for the global static keyword.
