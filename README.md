@@ -1,2 +1,2 @@
 # sound-synthesizer
-Create sound synthesizer from scratch in C/C++
+Create sound synthesizer from scratch in C++
